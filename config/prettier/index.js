@@ -37,6 +37,7 @@ const config = {
   arrowParens: 'avoid',
   singleQuote: true,
   endOfLine: 'auto',
+  jsxSingleQuote: true,
 }
 
 export default config
