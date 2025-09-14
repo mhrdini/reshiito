@@ -1,5 +1,5 @@
 module.exports = {
-  extends: ['@commitlint/cz-commitlint'],
+  extends: ['@commitlint/config-conventional'],
   rules: {
     'subject-case': [2, 'always', ['lower-case']],
   },
