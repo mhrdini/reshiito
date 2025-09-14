@@ -6,13 +6,15 @@
   "exports": {
     "./base": "./base.js",
     "./next-js": "./next.js",
-    "./react": "./react.js"
+    "./react": "./react.js",
+    "./expo": "./expo.js"
   },
   "devDependencies": {
     "@next/eslint-plugin-next": "^15.5.2",
     "eslint": "^9.34.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-js": "github:eslint/js",
+    "eslint-config-expo": "^10.0.0",
     "eslint-plugin-only-warn": "^1.1.0",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^5.2.0",

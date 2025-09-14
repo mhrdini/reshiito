@@ -57,7 +57,7 @@ importers:
   apps/mobile:
     dependencies:
       expo:
-        specifier: ^54.0.0
+        specifier: ~54.0.0
         version: 54.0.7(@babel/core@7.28.3)(@expo/metro-runtime@6.1.2)(expo-router@6.0.4)(react-native@0.81.4(@babel/core@7.28.3)(@types/react@19.1.13)(react@19.1.0))(react@19.1.0)
       expo-constants:
         specifier: ~18.0.8
@@ -93,7 +93,7 @@ importers:
         specifier: ~4.16.0
         version: 4.16.0(react-native@0.81.4(@babel/core@7.28.3)(@types/react@19.1.13)(react@19.1.0))(react@19.1.0)
       react-native-web:
-        specifier: ^0.21.1
+        specifier: ^0.21.0
         version: 0.21.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
     devDependencies:
       '@babel/core':
@@ -115,10 +115,10 @@ importers:
         specifier: ^3.2.5
         version: 3.6.2
       prettier-plugin-tailwindcss:
-        specifier: ^0.5.14
+        specifier: ^0.5.11
         version: 0.5.14(@ianvs/prettier-plugin-sort-imports@4.7.0(prettier@3.6.2))(prettier@3.6.2)
       tailwindcss:
-        specifier: ^3.4.17
+        specifier: ^3.4.0
         version: 3.4.17
       typescript:
         specifier: ~5.9.2
@@ -1347,7 +1347,7 @@ packages:
     resolution: {integrity: sha512-RbJRS4UWQFkzHTTwVymMTUv8EqYhOp8dOOviLj2ugtTiXRaRQS7GLGxZTLL1jWhMeoSCf5zmcZkqTl9IiYfXcQ==}
     peerDependencies:
       '@types/react': '*'
-      react: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
+      react: 19.1.0
     peerDependenciesMeta:
       '@types/react':
         optional: true
@@ -1411,8 +1411,8 @@ packages:
     engines: {node: '>= 20.19.4'}
     peerDependencies:
       '@types/react': ^19.1.0
-      react: '*'
-      react-native: '*'
+      react: 19.0.0
+      react-native: 0.79.5
     peerDependenciesMeta:
       '@types/react':
         optional: true
@@ -4867,7 +4867,7 @@ packages:
   tailwindcss-animate@1.0.7:
     resolution: {integrity: sha512-bl6mpH3T7I3UFxuvDEXLxy/VuFxBk5bbzplh7tXI68mwMokNYd1t9qPBHlnyTwfa4JGC4zP516I1hYYtQ/vspA==}
     peerDependencies:
-      tailwindcss: '>=3.0.0 || insiders'
+      tailwindcss: ^3.4.17
 
   tailwindcss@3.4.17:
     resolution: {integrity: sha512-w33E2aCvSDP0tW9RZuNXadXlkHXqFzSkQew/aIa2i/Sj8fThxwovwlXHSPXTbAHwEIhBFXAedUhP2tueAKP8Og==}
