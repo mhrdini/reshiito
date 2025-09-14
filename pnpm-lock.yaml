@@ -102,6 +102,9 @@ importers:
       '@config/prettier':
         specifier: workspace:*
         version: link:../../config/prettier
+      '@config/typescript':
+        specifier: workspace:*
+        version: link:../../config/typescript
       '@types/react':
         specifier: ~19.1.13
         version: 19.1.13

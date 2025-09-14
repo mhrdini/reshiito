@@ -27,6 +27,7 @@
     "react-native-web": "^0.21.0"
   },
   "devDependencies": {
+    "@config/typescript": "workspace:*",
     "@config/prettier": "workspace:*",
     "@babel/core": "^7.20.0",
     "@types/react": "~19.1.13",

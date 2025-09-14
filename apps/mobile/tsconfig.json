@@ -1,9 +1,6 @@
 {
-  "extends": "expo/tsconfig.base",
+  "extends": "@config/typescript/expo.json",
   "compilerOptions": {
-    "strict": true,
-    "jsx": "react-jsx",
-
     "baseUrl": ".",
     "paths": {
       "@/*": ["./*"]
