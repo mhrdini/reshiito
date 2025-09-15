@@ -2,7 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-@source './view';
+@source './components/text/';
+@source './components/view/';
 
 @custom-variant dark (&:is(.dark *));
 

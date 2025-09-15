@@ -1,11 +1,10 @@
 import { StatusBar } from 'expo-status-bar'
-
-import { ScreenContent } from '~/components/ScreenContent'
+import { HomeScreen } from '@screens'
 
 export default function App() {
   return (
     <>
-      <ScreenContent title='Home' path='index.tsx'></ScreenContent>
+      <HomeScreen title='Home' />
       <StatusBar style='auto' />
     </>
   )
