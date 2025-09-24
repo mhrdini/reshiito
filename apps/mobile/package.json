@@ -12,12 +12,11 @@
     "web": "expo start --web"
   },
   "dependencies": {
-    "@ui": "workspace:*",
     "@screens": "workspace:*",
-    "expo": "~54.0.0",
-    "expo-constants": "~18.0.8",
+    "expo": "~54.0.10",
+    "expo-constants": "~18.0.9",
     "expo-linking": "~8.0.8",
-    "expo-router": "~6.0.4",
+    "expo-router": "~6.0.8",
     "expo-status-bar": "~3.0.8",
     "nativewind": "latest",
     "react": "19.1.0",
@@ -26,18 +25,19 @@
     "react-native-reanimated": "~4.1.0",
     "react-native-safe-area-context": "5.6.1",
     "react-native-screens": "~4.16.0",
-    "react-native-web": "^0.21.0"
+    "react-native-web": "^0.21.0",
+    "tailwindcss-animate": "1.0.7"
   },
   "devDependencies": {
-    "@config/typescript": "workspace:*",
-    "@config/prettier": "workspace:*",
     "@babel/core": "^7.20.0",
+    "@config/prettier": "workspace:*",
+    "@config/typescript": "workspace:*",
     "@types/react": "~19.1.13",
     "eslint": "^9.25.1",
     "eslint-config-expo": "^10.0.0",
     "eslint-config-prettier": "^10.1.2",
     "prettier": "^3.2.5",
-    "tailwindcss": "^3.4.0",
+    "tailwindcss": "^3.4.17",
     "typescript": "~5.9.2"
   },
   "main": "expo-router/entry",

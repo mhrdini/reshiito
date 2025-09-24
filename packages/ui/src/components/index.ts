@@ -1,4 +1,3 @@
-import { Text } from './text'
-import { View } from './view'
-
-export { Text, View }
+export * from './text'
+export * from './view'
+export * from './button'

@@ -19,7 +19,7 @@ export const View = React.forwardRef<
 >(({ children, className, ...props }, ref) => {
   return (
     <ReactNativeView ref={ref} className={cn(className)} {...props}>
-      {children}
+      {content}
     </ReactNativeView>
   )
 })
