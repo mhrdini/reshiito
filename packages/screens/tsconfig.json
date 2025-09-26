@@ -1,9 +1,0 @@
-{
-  "extends": "@config/typescript/react-library.json",
-  "compilerOptions": {
-    "tsBuildInfoFile": "node_modules/.cache/tsbuildinfo.json",
-    "rootDir": "."
-  },
-  "include": ["src"],
-  "exclude": ["node_modules"]
-}

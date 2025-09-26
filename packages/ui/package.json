@@ -4,18 +4,17 @@
   "version": "1.0.0",
   "main": "index.ts",
   "license": "MIT",
-  "exports": {
-    "./components": {
-      "import": "./src/components/index.ts",
-      "require": "./src/components/index.ts"
-    },
-    "./utils": {
-      "import": "./src/utils/index.ts",
-      "require": "./src/utils/index.ts"
-    }
+  "devDependencies": {
+    "@config/eslint": "workspace:*",
+    "@config/prettier": "workspace:*",
+    "@config/tailwind": "workspace:*",
+    "@config/typescript": "workspace:*",
+    "tailwindcss": "^3.4.17"
   },
-  "dependencies": {
-    "clsx": "^2.1.1",
-    "tailwind-merge": "2.6.0"
+  "eslintConfig": {
+    "extends": [
+      "@config/eslint/base",
+      "@config/eslint/react"
+    ]
   }
 }
