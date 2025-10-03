@@ -5,7 +5,7 @@ import { cn } from '@ui/utils'
 import { cssInterop } from 'nativewind'
 
 interface TextProps extends RNTextProps {
-  children: React.ReactNode
+  children?: React.ReactNode
   className?: string
 }
 

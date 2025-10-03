@@ -11,7 +11,31 @@
     "experiments": {
       "tsconfigPaths": true
     },
-    "plugins": ["expo-router"],
+    "plugins": [
+      "expo-router",
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Allow reshiito to access your photos",
+          "cameraPermission": "Allow reshiito to access your camera"
+        }
+      ],
+      [
+        "expo-media-library",
+        {
+          "photosPermission": "Allow reshiito to access your photos",
+          "savePhotosPermission": "Allow reshiito to save photos",
+          "isAccessMediaLocationEnabled": true,
+          "granularPermissions": ["audio", "photo"]
+        }
+      ],
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Allow reshiito to access your camera"
+        }
+      ]
+    ],
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "automatic",

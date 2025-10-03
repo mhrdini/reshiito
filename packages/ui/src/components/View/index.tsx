@@ -5,7 +5,7 @@ import { cn } from '@ui/utils'
 import { cssInterop } from 'nativewind'
 
 interface ViewProps extends RNViewProps {
-  children: React.ReactNode
+  children?: React.ReactNode
   className?: string
 }
 

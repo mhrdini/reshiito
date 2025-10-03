@@ -3,7 +3,7 @@ import { useImageStore } from '@app/store'
 import { Button } from '@ui/components'
 
 export const SelectImageButton = () => {
-  const { setUri, setImage } = useImageStore()
+  const { setImage } = useImageStore()
 
   const selectImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -14,7 +14,13 @@ export const SelectImageButton = () => {
 
     if (!result.canceled) {
       const asset = result.assets[0]!
-      setImage(asset)
+      const image = {
+        uri: asset.uri,
+        height: asset.height!,
+        width: asset.width!,
+        base64: asset.base64!,
+      }
+      setImage(image)
     }
   }
 

@@ -1,16 +1,40 @@
+import type { CameraCapturedPicture } from 'expo-camera'
 import type { ImagePickerAsset } from 'expo-image-picker'
 import { getPaddedImageSize, ImageSize } from '@ui/utils'
 import { create } from 'zustand'
 
+type Image = {
+  uri: string
+  height: number
+  width: number
+  base64: string
+}
+
 interface ImageState {
-  image: ImagePickerAsset | null
+  image: Image | null
+  capturedImage: Image | null
   size: ImageSize | null
-  setImage: (image: ImagePickerAsset) => void
+  capturedSize: ImageSize | null
+  setImage: (image: Image) => void
+  setCapturedImage: (image: Image | null) => void
+  isCameraReady: boolean
+  setIsCameraReady: (ready: boolean) => void
 }
 
 export const useImageStore = create<ImageState>(set => ({
   image: null,
+  capturedImage: null,
   size: null,
+  capturedSize: null,
   setImage: image =>
     set({ image, size: getPaddedImageSize(image.height, image.width) }),
+  setCapturedImage: image =>
+    set({
+      capturedImage: image,
+      capturedSize: image
+        ? getPaddedImageSize(image.height, image.width, 150, 150)
+        : null,
+    }),
+  isCameraReady: false,
+  setIsCameraReady: ready => set({ isCameraReady: ready }),
 }))
