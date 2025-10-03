@@ -1,0 +1,27 @@
+{
+  "extends": "@config/typescript/expo.json",
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "nodenext",
+    "jsx": "react-native",
+    "strict": true,
+    "moduleResolution": "nodenext",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "tsBuildInfoFile": "node_modules/.cache/tsbuildinfo.json",
+    "baseUrl": ".",
+    "paths": {
+      "@ui/*": ["./packages/ui/src/*"],
+      "@app/screens": ["./packages/app/src/screens/*"],
+      "@app/features/ocr": ["./packages/app/src/features/ocr/*"]
+    }
+  },
+  "exclude": [
+    "node_modules",
+    "packages/**/node_modules",
+    "apps/**/node_modules",
+    "dist",
+    "packages/**/dist",
+    "apps/**/dist"
+  ]
+}

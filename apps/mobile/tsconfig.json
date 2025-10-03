@@ -1,9 +1,12 @@
 {
-  "extends": "@config/typescript/expo.json",
+  "extends": "../../tsconfig.json",
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "~/*": ["./*"]
-    }
+      "~/*": ["./*"],
+      "@app/*": ["../../packages/app/src/*"], // ensures Expo app sees @app
+      "@ui/*": ["../../packages/ui/src/*"] // ensures Expo app sees @ui
+    },
+    "types": ["react", "react-native"]
   }
 }
