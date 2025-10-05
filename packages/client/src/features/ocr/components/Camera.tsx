@@ -1,15 +1,12 @@
 import { useRef } from 'react'
 import { Pressable } from 'react-native'
-import {
-  CameraPictureOptions,
-  CameraView,
-  useCameraPermissions,
-} from 'expo-camera'
+import { CameraPictureOptions, CameraView } from 'expo-camera'
 import * as MediaLibrary from 'expo-media-library'
 import { useRouter } from 'expo-router'
-import { useImageStore } from '@app/store'
-import { Button, Image, Text, View } from '@ui/components'
-import { cn } from '@ui/utils'
+import { useLoadImage, usePermissions } from 'client/features/ocr/hooks'
+import { useImageStore } from 'client/store'
+import { Button, Image, View } from 'ui/components'
+import { cn } from 'ui/utils'
 
 export const Camera = () => {
   const router = useRouter()
@@ -23,38 +20,16 @@ export const Camera = () => {
     setImage,
   } = useImageStore()
 
+  const { permissions, requestPermissions } = usePermissions()
+
   // Required to ensure the camera is ready before taking a picture
   const onCameraReady = async () => {
     setIsCameraReady(true)
   }
 
   // Request permissions for camera and media library
-  const [permission, requestPermission] = useCameraPermissions()
-  const [mediaPermission, requestMediaPermission] =
-    MediaLibrary.usePermissions()
-
-  const requestPermissions = async () => {
-    if (!permission?.granted) {
-      await requestPermission()
-    }
-    if (!mediaPermission?.granted) {
-      await requestMediaPermission()
-    }
-  }
-
-  if (!permission || !mediaPermission) {
-    return <View />
-  }
-
-  if (!permission.granted || !mediaPermission.granted) {
-    return (
-      <View className='flex-1 justify-center'>
-        <Text className='pb-3 text-center'>
-          Allow reshiito to access your camera and photos
-        </Text>
-        <Button onPress={requestPermissions}>Allow</Button>
-      </View>
-    )
+  if (!permissions) {
+    requestPermissions()
   }
 
   // Button handlers
@@ -89,12 +64,7 @@ export const Camera = () => {
         isImageMirror: true,
       }
       const result = await cameraRef.current.takePictureAsync(options)
-      const image = {
-        uri: result.uri,
-        height: result.height,
-        width: result.width,
-        base64: result.base64!,
-      }
+      const image = useLoadImage(result)
       setCapturedImage(image)
     }
   }

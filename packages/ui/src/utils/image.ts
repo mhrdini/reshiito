@@ -1,6 +1,5 @@
 import { Dimensions } from 'react-native'
-
-export type ImageSize = { height: number; width: number }
+import { ImageSize } from 'types'
 
 export function getPaddedImageSize(
   height: number,

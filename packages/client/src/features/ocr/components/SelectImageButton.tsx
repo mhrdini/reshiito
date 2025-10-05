@@ -1,9 +1,14 @@
 import * as ImagePicker from 'expo-image-picker'
-import { useImageStore } from '@app/store'
-import { Button } from '@ui/components'
+import { useLoadImage } from 'client/features/ocr/hooks'
+import { useImageStore } from 'client/store'
+import { Button } from 'ui/components'
 
 export const SelectImageButton = () => {
   const { setImage } = useImageStore()
+
+  const handlePress = async () => {
+    await selectImage()
+  }
 
   const selectImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -14,18 +19,9 @@ export const SelectImageButton = () => {
 
     if (!result.canceled) {
       const asset = result.assets[0]!
-      const image = {
-        uri: asset.uri,
-        height: asset.height!,
-        width: asset.width!,
-        base64: asset.base64!,
-      }
+      const image = useLoadImage(asset)
       setImage(image)
     }
-  }
-
-  const handlePress = async () => {
-    await selectImage()
   }
 
   return <Button onPress={handlePress}>Choose from Library</Button>

@@ -1,8 +1,8 @@
 import type { TextProps as RNTextProps } from 'react-native'
 import React from 'react'
 import { Text as ReactNativeText } from 'react-native'
-import { cn } from '@ui/utils'
 import { cssInterop } from 'nativewind'
+import { cn } from 'ui/utils'
 
 interface TextProps extends RNTextProps {
   children?: React.ReactNode

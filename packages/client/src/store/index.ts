@@ -1,14 +1,6 @@
-import type { CameraCapturedPicture } from 'expo-camera'
-import type { ImagePickerAsset } from 'expo-image-picker'
-import { getPaddedImageSize, ImageSize } from '@ui/utils'
+import { Image, ImageSize } from 'types'
+import { getPaddedImageSize } from 'ui/utils'
 import { create } from 'zustand'
-
-type Image = {
-  uri: string
-  height: number
-  width: number
-  base64: string
-}
 
 interface ImageState {
   image: Image | null

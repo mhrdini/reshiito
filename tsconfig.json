@@ -1,5 +1,5 @@
 {
-  "extends": "@config/typescript/expo.json",
+  "extends": "config/typescript/expo.json",
   "compilerOptions": {
     "target": "esnext",
     "module": "nodenext",
@@ -11,9 +11,11 @@
     "tsBuildInfoFile": "node_modules/.cache/tsbuildinfo.json",
     "baseUrl": ".",
     "paths": {
-      "@ui/*": ["./packages/ui/src/*"],
-      "@app/screens": ["./packages/app/src/screens/*"],
-      "@app/features/ocr": ["./packages/app/src/features/ocr/*"]
+      "ui/*": ["./packages/ui/src/*"],
+      "types/*": ["./packages/types/src/*"],
+      "client/*": ["./packages/client/src/*"],
+      "client/screens/*": ["./packages/client/src/screens/*"],
+      "client/features/ocr/*": ["./packages/client/src/features/ocr/*"]
     }
   },
   "exclude": [

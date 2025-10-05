@@ -12,8 +12,8 @@
     "web": "expo start --web"
   },
   "dependencies": {
-    "@app": "workspace:*",
-    "@ui": "workspace:*",
+    "client": "workspace:*",
+    "ui": "workspace:*",
     "expo": "~54.0.12",
     "expo-camera": "~17.0.8",
     "expo-constants": "~18.0.8",
@@ -36,8 +36,8 @@
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
-    "@config/prettier": "workspace:*",
-    "@config/typescript": "workspace:*",
+    "config/prettier": "workspace:*",
+    "config/typescript": "workspace:*",
     "@types/react": "~19.1.13",
     "eslint": "^9.25.1",
     "eslint-config-expo": "^10.0.0",

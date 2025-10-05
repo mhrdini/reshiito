@@ -1,11 +1,12 @@
 {
-  "name": "@app",
+  "name": "client",
   "private": true,
   "version": "1.0.0",
   "license": "MIT",
   "main": "src/index.ts",
   "dependencies": {
-    "@ui": "workspace:*",
+    "ui": "workspace:*",
+    "types": "workspace:*",
     "clsx": "^2.1.1",
     "tailwind-merge": "2.6.0"
   }

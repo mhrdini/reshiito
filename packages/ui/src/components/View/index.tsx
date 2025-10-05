@@ -1,8 +1,8 @@
 import type { ViewProps as RNViewProps } from 'react-native'
 import React from 'react'
 import { View as RNView } from 'react-native'
-import { cn } from '@ui/utils'
 import { cssInterop } from 'nativewind'
+import { cn } from 'ui/utils'
 
 interface ViewProps extends RNViewProps {
   children?: React.ReactNode

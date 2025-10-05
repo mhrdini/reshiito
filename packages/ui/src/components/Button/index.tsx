@@ -1,9 +1,9 @@
 import type { PressableProps } from 'react-native'
 import React from 'react'
 import { Pressable as RNPressable } from 'react-native'
-import { Text } from '@ui/components/text'
-import { cn } from '@ui/utils'
 import { cssInterop } from 'nativewind'
+import { Text } from 'ui/components/text'
+import { cn } from 'ui/utils'
 
 interface ButtonProps extends PressableProps {
   children?: React.ReactNode

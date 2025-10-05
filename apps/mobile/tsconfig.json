@@ -4,8 +4,8 @@
     "baseUrl": ".",
     "paths": {
       "~/*": ["./*"],
-      "@app/*": ["../../packages/app/src/*"], // ensures Expo app sees @app
-      "@ui/*": ["../../packages/ui/src/*"] // ensures Expo app sees @ui
+      "client/*": ["../../packages/client/src/*"],
+      "ui/*": ["../../packages/ui/src/*"]
     },
     "types": ["react", "react-native"]
   }

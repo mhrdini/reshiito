@@ -14,15 +14,15 @@
     "@commitlint/cli": "^19.8.1",
     "@commitlint/config-conventional": "^19.8.1",
     "@commitlint/cz-commitlint": "^19.8.1",
-    "@config/eslint": "workspace:*",
-    "@config/prettier": "workspace:*",
-    "@config/typescript": "workspace:*",
     "commitizen": "^4.3.1",
+    "config/eslint": "workspace:*",
+    "config/prettier": "workspace:*",
+    "config/typescript": "workspace:*",
     "eslint": "^9.34.0",
     "inquirer": "9",
     "lint-staged": "^16.1.6",
     "prettier": "^3.6.2",
-    "turbo": "^2.5.6",
+    "turbo": "^2.5.8",
     "typescript": "5.9.2",
     "validate-branch-name": "^1.3.2"
   },
@@ -32,7 +32,7 @@
   },
   "validate-branch-name": {
     "pattern": "^(main){1}$|^(feat|fix|hotfix|release|chore)/.+$",
-    "errorMsg": "Invalid branch name \n Ex. [master, main, develop, feature/feature-info, fix/112-fix-info, hotfix/112-hotfix-info, release/1.0.0, chores/chores-info]"
+    "errorMsg": "Invalid branch name \n Ex. [master, develop, feature/feature-info, fix/112-fix-info, hotfix/112-hotfix-info, release/1.0.0, chores/chores-info]"
   },
   "lint-staged": {
     "**/*.{js,ts,jsx,tsx,css,html}": [
@@ -45,5 +45,5 @@
       "path": "@commitlint/cz-commitlint"
     }
   },
-  "prettier": "@config/prettier"
+  "prettier": "config/prettier"
 }

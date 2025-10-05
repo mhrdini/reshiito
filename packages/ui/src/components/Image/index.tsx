@@ -1,8 +1,8 @@
 import type { ImageProps as ExpoImageProps } from 'expo-image'
 import React from 'react'
 import { Image as ExpoImage } from 'expo-image'
-import { cn } from '@ui/utils'
 import { cssInterop } from 'nativewind'
+import { cn } from 'ui/utils'
 
 interface ImageProps extends ExpoImageProps {
   className?: string

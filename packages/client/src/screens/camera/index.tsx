@@ -1,9 +1,7 @@
 import { Platform } from 'react-native'
-import { SafeAreaView } from 'react-native-safe-area-context'
-import { StatusBar } from 'expo-status-bar'
-import { Camera } from '@app/features/ocr'
-import { View } from '@ui/components'
-import { cn } from '@ui/utils'
+import { Camera } from 'client/features/ocr'
+import { View } from 'ui/components'
+import { cn } from 'ui/utils'
 
 export const CameraScreen = () => {
   return (

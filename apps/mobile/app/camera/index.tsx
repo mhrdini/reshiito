@@ -1,4 +1,4 @@
-import { CameraScreen } from '@app/screens'
+import { CameraScreen } from 'client/screens'
 
 export default function CameraPage() {
   return <CameraScreen />
