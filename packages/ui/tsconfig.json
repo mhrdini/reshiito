@@ -1,10 +1,10 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "baseUrl": "src",
+    "baseUrl": ".",
     "paths": {
-      "ui/*": ["./*"],
-      "types/*": ["../../types/src/*"]
+      "ui/*": ["./src/*"],
+      "types/*": ["../types/src/*"]
     }
   },
   "include": ["src"]

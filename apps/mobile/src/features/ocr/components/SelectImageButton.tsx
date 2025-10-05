@@ -1,6 +1,6 @@
 import * as ImagePicker from 'expo-image-picker'
-import { useLoadImage } from 'client/features/ocr/hooks'
-import { useImageStore } from 'client/store'
+import { useLoadImage } from '@/features/ocr/hooks'
+import { useImageStore } from '@/store'
 import { Button } from 'ui/components'
 
 export const SelectImageButton = () => {

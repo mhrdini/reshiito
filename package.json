@@ -15,9 +15,9 @@
     "@commitlint/config-conventional": "^19.8.1",
     "@commitlint/cz-commitlint": "^19.8.1",
     "commitizen": "^4.3.1",
-    "config/eslint": "workspace:*",
-    "config/prettier": "workspace:*",
-    "config/typescript": "workspace:*",
+    "@config/eslint": "workspace:*",
+    "@config/prettier": "workspace:*",
+    "@config/typescript": "workspace:*",
     "eslint": "^9.34.0",
     "inquirer": "9",
     "lint-staged": "^16.1.6",
@@ -45,5 +45,5 @@
       "path": "@commitlint/cz-commitlint"
     }
   },
-  "prettier": "config/prettier"
+  "prettier": "@config/prettier"
 }

@@ -17,18 +17,18 @@ importers:
       '@commitlint/cz-commitlint':
         specifier: ^19.8.1
         version: 19.8.1(@types/node@24.3.1)(commitizen@4.3.1(@types/node@24.3.1)(typescript@5.9.2))(inquirer@9.3.7)(typescript@5.9.2)
+      '@config/eslint':
+        specifier: workspace:*
+        version: link:config/eslint
+      '@config/prettier':
+        specifier: workspace:*
+        version: link:config/prettier
+      '@config/typescript':
+        specifier: workspace:*
+        version: link:config/typescript
       commitizen:
         specifier: ^4.3.1
         version: 4.3.1(@types/node@24.3.1)(typescript@5.9.2)
-      config/eslint:
-        specifier: workspace:*
-        version: link:config/eslint
-      config/prettier:
-        specifier: workspace:*
-        version: link:config/prettier
-      config/typescript:
-        specifier: workspace:*
-        version: link:config/typescript
       eslint:
         specifier: ^9.34.0
         version: 9.34.0(jiti@2.5.1)
@@ -53,9 +53,6 @@ importers:
 
   apps/mobile:
     dependencies:
-      client:
-        specifier: workspace:*
-        version: link:../../packages/client
       expo:
         specifier: ~54.0.12
         version: 54.0.12(@babel/core@7.28.3)(@expo/metro-runtime@6.1.2)(expo-router@6.0.10)(react-native@0.81.4(@babel/core@7.28.3)(@types/react@19.1.13)(react@19.1.0))(react@19.1.0)
@@ -120,15 +117,15 @@ importers:
       '@babel/core':
         specifier: ^7.20.0
         version: 7.28.3
+      '@config/prettier':
+        specifier: workspace:*
+        version: link:../../config/prettier
+      '@config/typescript':
+        specifier: workspace:*
+        version: link:../../config/typescript
       '@types/react':
         specifier: ~19.1.13
         version: 19.1.13
-      config/prettier:
-        specifier: workspace:*
-        version: link:../../config/prettier
-      config/typescript:
-        specifier: workspace:*
-        version: link:../../config/typescript
       eslint:
         specifier: ^9.25.1
         version: 9.34.0(jiti@2.5.1)
@@ -202,21 +199,6 @@ importers:
   config/tailwind: {}
 
   config/typescript: {}
-
-  packages/client:
-    dependencies:
-      clsx:
-        specifier: ^2.1.1
-        version: 2.1.1
-      tailwind-merge:
-        specifier: 2.6.0
-        version: 2.6.0
-      types:
-        specifier: workspace:*
-        version: link:../types
-      ui:
-        specifier: workspace:*
-        version: link:../ui
 
   packages/types: {}
 

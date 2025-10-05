@@ -1,5 +1,5 @@
 import { Platform } from 'react-native'
-import { Camera } from 'client/features/ocr'
+import { Camera } from '@/features/ocr'
 import { View } from 'ui/components'
 import { cn } from 'ui/utils'
 

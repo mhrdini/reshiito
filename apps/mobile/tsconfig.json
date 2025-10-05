@@ -3,10 +3,9 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "~/*": ["./*"],
-      "client/*": ["../../packages/client/src/*"],
+      "@/*": ["./src/*"],
       "ui/*": ["../../packages/ui/src/*"]
-    },
-    "types": ["react", "react-native"]
-  }
+    }
+  },
+  "include": ["src/**/*", "nativewind-env.d.ts", "app-env.d.ts"]
 }
