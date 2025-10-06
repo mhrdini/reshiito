@@ -1,0 +1,51 @@
+Metadata-Version: 2.4
+Name: server
+Version: 0.1.0
+Summary: FastAPI server for reshiito
+Requires-Python: >=3.13
+Description-Content-Type: text/markdown
+Requires-Dist: fastapi[standard]>=0.118.0
+Requires-Dist: pillow>=11.3.0
+Requires-Dist: pytesseract>=0.3.13
+Requires-Dist: setuptools>=80.9.0
+Requires-Dist: uvicorn[standard]>=0.37.0
+Requires-Dist: ocr-core
+Requires-Dist: pydantic-to-typescript>=2.0.0
+
+# Server for reshiito
+
+## Requirements
+
+- [uv](https://docs.astral.sh/uv/getting-started/installation/)
+
+## Setup
+
+In the project root directory:
+
+```bash
+pnpm setup:python
+```
+
+## Development
+
+To start server:
+
+- In parallel as part of Turbo monorepo, from the root directory
+- Or standalone, from this package directory
+
+```bash
+pnpm dev
+```
+
+To install dependencies, from this package directory:
+
+```bash
+uv add <package-name>
+uv sync --upgrade
+```
+
+To export `uv` installs to `requirements.txt`:
+
+```bash
+uv export -o requirements.txt
+```

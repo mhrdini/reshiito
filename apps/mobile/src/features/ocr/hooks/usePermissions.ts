@@ -1,7 +1,7 @@
 import { useCameraPermissions } from 'expo-camera'
 import * as MediaLibrary from 'expo-media-library'
 
-export function usePermissions() {
+export const usePermissions = () => {
   const [permission, requestPermission] = useCameraPermissions()
   const [mediaPermission, requestMediaPermission] =
     MediaLibrary.usePermissions()

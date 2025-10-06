@@ -1,0 +1,3 @@
+{
+  "internal_packages": ["packages/ocr_core", "config/shared"]
+}

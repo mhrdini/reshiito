@@ -1,7 +1,9 @@
 import type { CameraCapturedPicture } from 'expo-camera'
 import type { ImagePickerAsset } from 'expo-image-picker'
 
-export function useLoadImage(result: CameraCapturedPicture | ImagePickerAsset) {
+export const useLoadImage = (
+  result: CameraCapturedPicture | ImagePickerAsset,
+) => {
   const image = {
     uri: result.uri,
     height: result.height,

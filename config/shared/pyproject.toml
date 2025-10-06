@@ -1,0 +1,12 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "shared-config"
+version = "1.0.0"
+description = "Shared config for both Python and Expo"
+dependencies = []
+
+[tool.setuptools.packages.find]
+where = ["."]

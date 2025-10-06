@@ -1,0 +1,21 @@
+[project]
+name = "server"
+version = "0.1.0"
+description = "FastAPI server for reshiito"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "fastapi[standard]>=0.118.0",
+    "pillow>=11.3.0",
+    "pytesseract>=0.3.13",
+    "setuptools>=80.9.0",
+    "uvicorn[standard]>=0.37.0",
+    "ocr-core",
+    "pydantic-to-typescript>=2.0.0",
+]
+
+[tool.uv.sources]
+ocr_core = { path="../../packages/ocr_core/", editable=true }
+
+[tool.pylance]
+pythonPath = ".venv/bin/python3"

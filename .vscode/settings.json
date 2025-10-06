@@ -3,5 +3,6 @@
     {
       "mode": "auto"
     }
-  ]
+  ],
+  "python.analysis.extraPaths": ["/apps/server/.venv/", "/packages/ocr_core/"]
 }

@@ -4,7 +4,10 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
-      "ui/*": ["../../packages/ui/src/*"]
+      "ui/*": ["../../packages/ui/src/*"],
+      "types/*": ["../../packages/types/src/*"],
+      "@config/shared/*": ["../../config/shared/*"],
+      "@env": ["src/env.d.ts"]
     }
   },
   "include": ["src/**/*", "nativewind-env.d.ts", "app-env.d.ts"]

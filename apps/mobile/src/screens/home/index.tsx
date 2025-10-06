@@ -1,12 +1,17 @@
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { StatusBar } from 'expo-status-bar'
+import { API_URL } from '@/config/api'
 import { SelectImageButton, TakePhotoButton } from '@/features/ocr'
-import { useImageStore } from '@/store'
+import { useOCR } from '@/features/ocr/hooks'
+import { useImageStore, useOCRStore } from '@/store'
 import { Image, Text, View } from 'ui/components'
 import { cn } from 'ui/utils'
 
 export const HomeScreen = () => {
   const { image, size } = useImageStore()
+
+  useOCR()
+  const { response } = useOCRStore()
 
   return (
     <SafeAreaView
@@ -26,6 +31,8 @@ export const HomeScreen = () => {
         <TakePhotoButton />
         <SelectImageButton />
       </View>
+      <Text>{API_URL}</Text>
+      <Text>{response}</Text>
     </SafeAreaView>
   )
 }

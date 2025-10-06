@@ -1,0 +1,7 @@
+fastapi[standard]>=0.118.0
+pillow>=11.3.0
+pytesseract>=0.3.13
+setuptools>=80.9.0
+uvicorn[standard]>=0.37.0
+ocr-core
+pydantic-to-typescript>=2.0.0

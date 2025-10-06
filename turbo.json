@@ -14,8 +14,14 @@
       "dependsOn": ["^check-types"]
     },
     "dev": {
+      "dependsOn": ["^dev"],
       "cache": false,
       "persistent": true
+    },
+    "server#dev": {
+      "cache": false,
+      "persistent": true,
+      "outputs": []
     },
     "start": {
       "cache": false,

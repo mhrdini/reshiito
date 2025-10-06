@@ -1,0 +1,13 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ocr-core"
+version = "0.1.0"
+description = "OCR core functionality"
+requires-python = ">=3.13"
+
+[tool.setuptools]
+packages = ["ocr_core"]
+package-dir = {"" = "."}
