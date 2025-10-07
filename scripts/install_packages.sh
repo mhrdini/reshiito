@@ -9,9 +9,9 @@ INTERNAL_PACKAGES=($(jq -r '.internal_packages[]' "$ROOT_DIR/config/internal_pac
 
 for pkg in "${INTERNAL_PACKAGES[@]}"; do
     if [ -d "$pkg" ]; then
-        echo "➡️  Installing: $pkg" >&2
+        echo "➡️  Installing: $pkg"
         python -m pip install -e "$pkg"
     else
-        echo "⚠️ Internal package path does not exist: $pkg" >&2
+        echo "⚠️ Internal package path does not exist: $pkg"
     fi
 done

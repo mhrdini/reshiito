@@ -11,8 +11,9 @@ find scripts -type f -exec bash -c 'head -n1 "$1" | grep -q "^#\!" && chmod +x "
 # ----------------------------------------------
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ROOT_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
-VENV_DIR="$ROOT_DIR/apps/server/.venv"
-PYTHON_VERSION="3.13"
+SERVER_DIR="$ROOT_DIR/apps/server"
+VENV_DIR="$SERVER_DIR/.venv"
+PYTHON_VERSION="3.12"
 
 EXTRA_DEPS_FILE="extra_deps.py"
 
@@ -20,31 +21,32 @@ EXTRA_DEPS_FILE="extra_deps.py"
 # > Install direnv locally if missing
 # ----------------------------------------------
 if ! command -v direnv &>/dev/null; then
-    echo "⚠️ direnv not installed, please follow install instructions at: https://direnv.net/docs/installation.html" >&2
+    echo "⚠️ direnv not installed, please follow install instructions at: https://direnv.net/docs/installation.html"
     exit 1
 else
-    echo "✅ direnv already installed" >&2
+    echo "✅ direnv already installed"
 fi
 
 # ----------------------------------------------
 # > Install uv locally if missing
 # ----------------------------------------------
 if ! command -v uv &> /dev/null; then
-    echo "⬇️ Installing uv..." >&2
+    echo "⬇️ Installing uv..."
     curl -sSL https://astral.sh/uv/install.sh | bash
 else
-    echo "✅ uv already installed" >&2
+    echo "✅ uv already installed"
 fi
 
 # ----------------------------------------------
 # > Install Python & create venv if missing
 # ----------------------------------------------
 if [ ! -d "$VENV_DIR" ]; then
-    echo "🐍 .venv not found, installing Python $PYTHON_VERSION and creating venv..." >&2
-    uv python install "$PYTHON_VERSION"
-    uv venv -p "$PYTHON_VERSION" "$VENV_DIR"
+    echo "🐍 .venv not found, installing Python $PYTHON_VERSION and creating .venv..."
+    cd $SERVER_DIR
+    uv sync
+    cd $ROOT_DIR
 else
-    echo "✅ .venv already exists" >&2
+    echo "✅ .venv already exists"
 fi
 
 # ----------------------------------------------
@@ -53,19 +55,29 @@ fi
 PYTHON="$VENV_DIR/bin/python"
 export PATH="$VENV_DIR/bin:$PATH"
 ACTIVATE_PATH="$VENV_DIR/bin/activate"
-source "$ACTIVATE_PATH"
-echo "🐍 Using $($PYTHON -V)" >&2
+source $ACTIVATE_PATH
+echo "🐍 Using $($PYTHON -V)"
 
 # ----------------------------------------------
 # > Install pip, setuptools, wheel
 # ----------------------------------------------
-"$PYTHON" -m ensurepip --upgrade
-"$PYTHON" -m pip install --upgrade pip setuptools wheel toml
+if ! "$PYTHON" -m pip --version &>/dev/null; then
+    echo "⬇️ Installing pip via ensurepip..."
+    "$PYTHON" -m ensurepip --upgrade || echo "⚠️ ensurepip failed — skipping"
+fi
+
+# Upgrade pip/setuptools/wheel incrementally to reduce memory pressure
+"$PYTHON" -m pip install --upgrade --no-cache-dir pip || echo "⚠️ pip upgrade failed, continuing"
+"$PYTHON" -m pip install --upgrade --no-cache-dir setuptools wheel toml || echo "⚠️ setuptools/wheel install failed, continuing"
 
 # ----------------------------------------------
 # > Install internal packages as editable
 # ----------------------------------------------
-bash -c $(source ./install_packages.sh)
+if [ -f "$SCRIPT_DIR/install_packages.sh" ]; then
+    source "$SCRIPT_DIR/install_packages.sh"
+else
+    echo "⚠️ install_packages.sh not found — skipping"
+fi
 
 # ----------------------------------------------
 # > Extract extras from pyproject.toml (optional dependencies)
@@ -85,7 +97,7 @@ for pkg in "${PYTHON_PACKAGES[@]}"; do
     if [ -f "$PACKAGE_DIR/${PYPROJECT_TOML}" ]; then
         (
         cd "$PACKAGE_DIR"
-        echo "➡️  Installing $pkg..." >&2
+        echo "➡️  Installing $pkg..."
         
         if [ -n "$EXTRAS" ]; then
             "$PYTHON" -m pip install ".[${EXTRAS}]" -e .
@@ -93,23 +105,25 @@ for pkg in "${PYTHON_PACKAGES[@]}"; do
             "$PYTHON" -m pip install -e .
         fi
 
-        echo "➡️  Exporting dependencies to requirements.txt..." >&2
+        echo "➡️  Exporting dependencies to requirements.txt..."
         uv export --no-hashes --format requirements-txt -p "$PYTHON" > "$REQUIREMENTS_TXT"
         )
     else
-        echo "⚠️ No ${PYPROJECT_TOML} found in $pkg — skipping." >&2
+        echo "⚠️ No ${PYPROJECT_TOML} found in $pkg — skipping."
     fi
 done
 
-echo "✅ All Python dependencies installed and requirements.txt generated!" >&2
+echo "✅ All Python dependencies installed and requirements.txt generated!"
 
 # ----------------------------------------------
 # > Run codegen script(s)
 # ----------------------------------------------
-bash -c $(source ./generate_types.sh)
-
+if [ -f "$SCRIPT_DIR/install_packages.sh" ]; then
+    source "$SCRIPT_DIR/generate_types.sh"
+else
+    echo "⚠️ generate_types.sh not found — skipping"
+fi
 # ----------------------------------------------
 # > Output venv activate path for shell sourcing
 # ----------------------------------------------
 echo "$ACTIVATE_PATH" > "$ROOT_DIR/.envrc.setup"
-echo "$ACTIVATE_PATH"

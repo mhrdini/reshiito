@@ -6,8 +6,15 @@ try {
   console.log('➡️ Installing global dependencies...')
   const globalDeps = ['json-schema-to-typescript']
   for (dep of globalDeps) {
-    execSync(`pnpm add -g ${dep}`, { stdio: 'inherit' })
-    console.log(`✅ Installed: ${dep}`)
+    try {
+      // Check if the package is already installed globally
+      execSync(`pnpm list -g ${dep}`, { stdio: 'ignore' })
+      console.log(`✅ Already installed: ${dep}`)
+    } catch (err) {
+      // Not installed — install it
+      console.log(`⬇️ Installing ${dep}...`)
+      execSync(`pnpm add -g ${dep}`, { stdio: 'inherit' })
+    }
   }
 
   const platform = os.platform() // 'darwin', 'win32', 'linux', etc.

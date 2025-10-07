@@ -111,10 +111,12 @@ typer==0.19.2
     #   fastapi-cloud-cli
 typing-extensions==4.15.0
     # via
+    #   anyio
     #   fastapi
     #   pydantic
     #   pydantic-core
     #   rich-toolkit
+    #   starlette
     #   typer
     #   typing-inspection
 typing-inspection==0.4.2

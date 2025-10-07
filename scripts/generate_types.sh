@@ -3,7 +3,7 @@
 # > Run codegen script(s)
 # ----------------------------------------------
 if ! command -v json2ts &> /dev/null; then
-    echo "⚠️ json2ts not installed, please run the command: pnpm setup:python" >&2
+    echo "⚠️ json2ts not installed, please run the command: pnpm setup:python"
     exit 1
 fi
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"

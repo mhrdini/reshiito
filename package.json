@@ -10,7 +10,7 @@
     "check-types": "turbo run check-types",
     "commit": "git-cz",
     "setup:python": "node scripts/setupPython.js",
-    "setup:python:unix": "bash -c 'source $(bash scripts/setup_python.sh | tail -n 1)'",
+    "setup:python:unix": "bash scripts/setup_python.sh",
     "setup:python:windows": "powershell -ExecutionPolicy ByPass -File scripts\\setup_python.ps1 | ForEach-Object { & $_ }",
     "generate:types": "node scripts/generateTypes.js",
     "generate:types:unix": "bash scripts/generate_types.sh",

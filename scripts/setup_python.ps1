@@ -12,7 +12,7 @@ Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass -Force
 $ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Definition
 $RootDir = Join-Path $ScriptDir ".."
 $VenvDir = Join-Path $RootDir "apps\server\.venv"
-$PythonVersion = "3.13"
+$PythonVersion = "3.12"
 
 $ExtraDepsFile = "extra_deps.py"
 # ----------------------------------------------
