@@ -106,7 +106,7 @@ echo "✅ All Python dependencies installed and requirements.txt generated!" >&2
 # ----------------------------------------------
 # > Run codegen script(s)
 # ----------------------------------------------
-bash -c $(source ./install_packages.sh)
+bash -c $(source ./generate_types.sh)
 
 # ----------------------------------------------
 # > Output venv activate path for shell sourcing
