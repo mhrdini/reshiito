@@ -1,10 +1,14 @@
 from app.core.deps import get_ocr_service
+from app.logger import logger
 from fastapi import APIRouter, Depends
 from ocr_core.schemas import OCRRequest, OCRResponse
 from ocr_core.services import OCRServiceInterface
 from ocr_core.strategies import get_input_strategy
+from shared import ocr
 
 router = APIRouter()
+
+DEFAULT_LANGUAGE = ocr["languages"]["japanese"]
 
 
 @router.get("/ocr")
@@ -19,9 +23,18 @@ async def health_check():
 async def perform_ocr(
     req: OCRRequest, ocr_service: OCRServiceInterface = Depends(get_ocr_service)
 ):
-    """
-    Accepts an image, validates it, and returns the extracted text.
-    """
-    strategy = get_input_strategy(req)
-    text = await ocr_service.extract_text(strategy)
-    return OCRResponse(text=text)
+    try:
+        strategy = get_input_strategy(req)
+        logger.info("✨ Starting OCR processing...")
+        text = await ocr_service.extract_text_async(
+            strategy, lang=req.lang or DEFAULT_LANGUAGE
+        )
+        return OCRResponse(text=text)
+    except ValueError as ve:
+        # Handle invalid image input
+        logger.error(f"perform_ocr: {ve}")
+        raise
+    except Exception as e:
+        # Catch-all for anything else
+        logger.error(f"perform_ocr: {e}")
+        raise

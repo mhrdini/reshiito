@@ -1,5 +1,5 @@
 import * as ImagePicker from 'expo-image-picker'
-import { useLoadImage } from '@/features/ocr/hooks'
+import { convertToImage } from '@/features/ocr/utils'
 import { useImageStore } from '@/store'
 import { Button } from 'ui/components'
 
@@ -12,6 +12,7 @@ export const SelectImageButton = () => {
 
   const selectImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
+      base64: true,
       mediaTypes: ['images', 'livePhotos'],
       allowsEditing: true,
       quality: 1,
@@ -19,7 +20,7 @@ export const SelectImageButton = () => {
 
     if (!result.canceled) {
       const asset = result.assets[0]!
-      const image = useLoadImage(asset)
+      const image = convertToImage(asset)
       setImage(image)
     }
   }

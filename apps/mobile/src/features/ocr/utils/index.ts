@@ -1,7 +1,7 @@
 import type { CameraCapturedPicture } from 'expo-camera'
 import type { ImagePickerAsset } from 'expo-image-picker'
 
-export const useLoadImage = (
+export const convertToImage = (
   result: CameraCapturedPicture | ImagePickerAsset,
 ) => {
   const image = {

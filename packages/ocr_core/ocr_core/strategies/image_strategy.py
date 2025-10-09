@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 
 from PIL import Image
 
-from ..preprocessing import base64_to_image, bytes_to_image
+from ..helpers import base64_to_image, bytes_to_image
 from ..schemas import OCRRequest
 
 """

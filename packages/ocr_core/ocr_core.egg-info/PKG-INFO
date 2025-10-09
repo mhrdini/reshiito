@@ -3,3 +3,4 @@ Name: ocr-core
 Version: 0.1.0
 Summary: OCR core functionality
 Requires-Python: >=3.12
+Requires-Dist: shared

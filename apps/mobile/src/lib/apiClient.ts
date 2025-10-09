@@ -1,5 +1,5 @@
 import Constants from 'expo-constants'
-import versionConfig from '@config/shared/api_version.json'
+import { api as apiConfig } from '@config/shared'
 import { APP_ENV, API_URL as envApiUrl } from '@env'
 import ky from 'ky'
 
@@ -19,11 +19,14 @@ const getApiUrl = () => {
   return url
 }
 
-export const API_VERSION = versionConfig.API_VERSION
+export const API_VERSION = apiConfig.API_VERSION
 export const API_URL = getApiUrl()
 export const API_PREFIX_URL = API_URL + '/api/' + API_VERSION
 
-export const api = ky.create({ prefixUrl: API_PREFIX_URL })
+export const api = ky.create({
+  prefixUrl: API_PREFIX_URL,
+  headers: { 'Content-Type': 'application/json' },
+})
 
 // export const ocrApi = api.extend(options => ({
 //   prefixUrl: `${options.prefixUrl}/ocr`,

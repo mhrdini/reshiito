@@ -1,4 +1,5 @@
 import js from '@eslint/js'
+import pluginQuery from '@tanstack/eslint-plugin-query'
 import eslintConfigPrettier from 'eslint-config-prettier'
 import onlyWarn from 'eslint-plugin-only-warn'
 import turboPlugin from 'eslint-plugin-turbo'
@@ -13,6 +14,7 @@ export const config = [
   js.configs.recommended,
   eslintConfigPrettier,
   ...tseslint.configs.recommended,
+  ...pluginQuery.configs['flat/recommended'],
   {
     plugins: {
       turbo: turboPlugin,

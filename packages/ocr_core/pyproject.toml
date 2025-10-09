@@ -7,6 +7,12 @@ name = "ocr-core"
 version = "0.1.0"
 description = "OCR core functionality"
 requires-python = ">=3.12"
+dependencies = [
+    "shared"
+]
+
+[tool.uv.sources]
+shared = { path="../../config/shared/", editable=true }
 
 [tool.setuptools]
 packages = ["ocr_core"]

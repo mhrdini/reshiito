@@ -1,8 +1,17 @@
 README.md
 pyproject.toml
 ./ocr_core/__init__.py
+./ocr_core/config.py
+./ocr_core/core.py
+./ocr_core/helpers.py
+./ocr_core/logger.py
 ocr_core/__init__.py
+ocr_core/config.py
+ocr_core/core.py
+ocr_core/helpers.py
+ocr_core/logger.py
 ocr_core.egg-info/PKG-INFO
 ocr_core.egg-info/SOURCES.txt
 ocr_core.egg-info/dependency_links.txt
+ocr_core.egg-info/requires.txt
 ocr_core.egg-info/top_level.txt

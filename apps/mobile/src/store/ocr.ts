@@ -1,11 +1,11 @@
 import { create } from 'zustand'
 
 interface OCRState {
-  response: string
-  setResponse: (response: string) => void
+  result: string
+  setResult: (result: string) => void
 }
 
 export const useOCRStore = create<OCRState>(set => ({
-  response: '',
-  setResponse: response => set({ response }),
+  result: '',
+  setResult: result => set({ result }),
 }))

@@ -15,8 +15,6 @@ SERVER_DIR="$ROOT_DIR/apps/server"
 VENV_DIR="$SERVER_DIR/.venv"
 PYTHON_VERSION="3.12"
 
-EXTRA_DEPS_FILE="extra_deps.py"
-
 # ----------------------------------------------
 # > Install direnv locally if missing
 # ----------------------------------------------
@@ -71,49 +69,13 @@ fi
 "$PYTHON" -m pip install --upgrade --no-cache-dir setuptools wheel toml || echo "⚠️ setuptools/wheel install failed, continuing"
 
 # ----------------------------------------------
-# > Install internal packages as editable
+# > Install packages and export requirements
 # ----------------------------------------------
 if [ -f "$SCRIPT_DIR/install_packages.sh" ]; then
     source "$SCRIPT_DIR/install_packages.sh"
 else
     echo "⚠️ install_packages.sh not found — skipping"
 fi
-
-# ----------------------------------------------
-# > Extract extras from pyproject.toml (optional dependencies)
-# ----------------------------------------------
-EXTRAS=$($PYTHON "$SCRIPT_DIR/$EXTRA_DEPS_FILE")
-
-# ----------------------------------------------
-# > Install packages and export requirements
-# ----------------------------------------------
-PYTHON_PACKAGES=("apps/server" "packages/ocr_core")
-PYPROJECT_TOML="pyproject.toml"
-REQUIREMENTS_TXT="requirements.txt"
-
-for pkg in "${PYTHON_PACKAGES[@]}"; do
-    PACKAGE_DIR="$ROOT_DIR/$pkg"
-
-    if [ -f "$PACKAGE_DIR/${PYPROJECT_TOML}" ]; then
-        (
-        cd "$PACKAGE_DIR"
-        echo "➡️  Installing $pkg..."
-        
-        if [ -n "$EXTRAS" ]; then
-            "$PYTHON" -m pip install ".[${EXTRAS}]" -e .
-        else
-            "$PYTHON" -m pip install -e .
-        fi
-
-        echo "➡️  Exporting dependencies to requirements.txt..."
-        uv export --no-hashes --format requirements-txt -p "$PYTHON" > "$REQUIREMENTS_TXT"
-        )
-    else
-        echo "⚠️ No ${PYPROJECT_TOML} found in $pkg — skipping."
-    fi
-done
-
-echo "✅ All Python dependencies installed and requirements.txt generated!"
 
 # ----------------------------------------------
 # > Run codegen script(s)

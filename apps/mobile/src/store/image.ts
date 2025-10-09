@@ -9,6 +9,8 @@ interface ImageState {
   capturedSize: ImageSize | null
   setImage: (image: Image) => void
   setCapturedImage: (image: Image | null) => void
+  clearImage: () => void
+  clearCapturedImage: () => void
   isCameraReady: boolean
   setIsCameraReady: (ready: boolean) => void
 }
@@ -27,6 +29,8 @@ export const useImageStore = create<ImageState>(set => ({
         ? getPaddedImageSize(image.height, image.width, 150, 150)
         : null,
     }),
+  clearImage: () => set({ image: null, size: null }),
+  clearCapturedImage: () => set({ capturedImage: null, capturedSize: null }),
   isCameraReady: false,
   setIsCameraReady: ready => set({ isCameraReady: ready }),
 }))

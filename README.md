@@ -48,8 +48,8 @@ What this script does:
 - Installs `uv` (Python package and project manager)
 - Creates a Python virtual environment at `/apps/server/.venv`
 - Install prerequisites (`pip`, `setuptools`, `wheel`, `toml`)
-- Install internal packages listed in `/config/internal_packages.json` as editable installs
-- Install dependencies of internal packages
+- Install internal packages listed in `/config/python_packages.json` as editable installs
+- Install dependencies of packages listed in `/config/python_packages.json`
 - Generates TypeScript types in `/packages/types/schemas` from Pydantic schemas
   in `packages/*_core/**/schemas.py`
 - (Unix only) Sets up `direnv` to activate Python at the created virtual

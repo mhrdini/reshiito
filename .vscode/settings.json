@@ -4,7 +4,11 @@
       "mode": "auto"
     }
   ],
-  "python.analysis.extraPaths": ["/apps/server/.venv/", "/packages/ocr_core/"],
+  "python.analysis.extraPaths": [
+    "/apps/server/",
+    "/packages/ocr_core/",
+    "/config/shared/"
+  ],
   "python.defaultInterpreterPath": "/apps/server/.venv/bin/python",
   "python.terminal.activateEnvironment": true
 }

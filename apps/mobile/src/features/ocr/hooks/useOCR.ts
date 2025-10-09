@@ -1,19 +1,32 @@
-import { useEffect } from 'react'
-import { checkOcrService } from '@/features/ocr/services/api'
-import { useOCRStore } from '@/store'
+import { usePerformOCRMutation } from '@/features/ocr/ocr.query'
+import { ocr as ocrConfig } from '@config/shared'
+import { OCRRequest } from 'types/schemas'
 
 export const useOCR = () => {
-  const { setResponse } = useOCRStore()
+  const {
+    mutateAsync: performOCR,
+    isPending,
+    isSuccess,
+  } = usePerformOCRMutation()
 
-  useEffect(() => {
-    async function getOcr() {
-      const response = await checkOcrService()
-      const result = response.text
-      return result
+  const getLanguages = () => {
+    return Object.values(ocrConfig.languages).join('+')
+  }
+
+  const prepareRequest = (b64: string): OCRRequest => ({
+    b64,
+    lang: getLanguages(),
+  })
+
+  const extractText = async (b64: string) => {
+    try {
+      const req = prepareRequest(b64)
+      const res = await performOCR(req)
+      return res.text
+    } catch (err) {
+      console.error('OCR text extraction failed:', err)
     }
+  }
 
-    getOcr().then(response => setResponse(response))
-  }, [setResponse])
-
-  return
+  return { extractText, isPending, isSuccess }
 }

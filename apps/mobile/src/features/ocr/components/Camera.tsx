@@ -3,7 +3,8 @@ import { Pressable } from 'react-native'
 import { CameraPictureOptions, CameraView } from 'expo-camera'
 import * as MediaLibrary from 'expo-media-library'
 import { useRouter } from 'expo-router'
-import { useLoadImage, usePermissions } from '@/features/ocr/hooks'
+import { usePermissions } from '@/features/ocr/hooks'
+import { convertToImage } from '@/features/ocr/utils'
 import { useImageStore } from '@/store'
 import { Button, Image, View } from 'ui/components'
 import { cn } from 'ui/utils'
@@ -14,6 +15,7 @@ export const Camera = () => {
   const {
     capturedImage,
     setCapturedImage,
+    clearCapturedImage,
     capturedSize,
     isCameraReady,
     setIsCameraReady,
@@ -35,13 +37,13 @@ export const Camera = () => {
   // Button handlers
   const cancel = () => {
     setIsCameraReady(false)
-    setCapturedImage(null)
+    clearCapturedImage()
     router.back()
   }
 
   const retake = () => {
     setIsCameraReady(true)
-    setCapturedImage(null)
+    clearCapturedImage()
   }
 
   const confirm = async () => {
@@ -49,7 +51,7 @@ export const Camera = () => {
     if (capturedImage) {
       await MediaLibrary.saveToLibraryAsync(capturedImage.uri)
       setImage(capturedImage)
-      setCapturedImage(null)
+      clearCapturedImage()
       router.dismissAll()
     }
   }
@@ -64,7 +66,7 @@ export const Camera = () => {
         isImageMirror: true,
       }
       const result = await cameraRef.current.takePictureAsync(options)
-      const image = useLoadImage(result)
+      const image = convertToImage(result)
       setCapturedImage(image)
     }
   }

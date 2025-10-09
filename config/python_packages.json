@@ -1,0 +1,4 @@
+{
+  "internal_packages": ["config/shared", "packages/ocr_core"],
+  "python_packages": ["config/shared", "packages/ocr_core", "apps/server"]
+}

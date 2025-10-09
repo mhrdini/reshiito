@@ -7,14 +7,17 @@
 ⚠️ **NOTE:** If the Python package will have Pydantic schemas for an API endpoint (or for any other
 reason):
 
-> The package name **must** end with **`"_core"`** (see section: **Creating a `/packages/*_core` Python package**)
+> The package name **must end with`"_core"`** (for more info see [this section](##✨-creating-a-/packages/*_core-python-package))
 
 Otherwise, create the package directory in this way:
 
 ```bash
 cd $PROJECT_DIRECTORY
-mkdir /path/to/package_core/package_core
+mkdir /path/to/package_name/package_name
 ```
+
+An inner folder with the same name as the package is required to
+make it importable.
 
 Create a `pyproject.toml` in the package directory:
 
@@ -25,14 +28,21 @@ requires = ["setuptools", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "<package-name>" # Edit the package name with dash-case
-version = "1.0.0"
+name = "<package-name>" # Edit the package name with dash-case, same name as the inner folder
+version = "0.1.0"
 description = "Package description"
+requires-python = ">=3.12"
 dependencies = []
 
 [tool.setuptools.packages.find]
 where = ["."] # When making a flat package
 ```
+
+⚠️ **NOTE:** The inner folder **must** exist and be the same name as the package
+itself:
+
+- Inner folder name: `package_name` (in snake_case)
+- Package name in `pyproject.toml`: `package-name` (in dash-case)
 
 ### ⚠️ To import modules, create its own `__init__.py`
 
@@ -52,11 +62,21 @@ __all__ = ["OCRRequest", "OCRResponse"]
 
 ### Install it as an editable install
 
-Add the package directory (relative to the project root) to `config/internal_packages.json`:
+Add the package directory (relative to the project root) to `config/packages_json.json`:
 
 ```json
 {
-  "internal_packages": ["packages/ocr_core", "config/shared", "<package-name>"]
+  "internal_packages": [
+    "config/shared",
+    "packages/ocr_core",
+    "/path/to/package_core" <-- Add it here
+  ],
+  "python_packages": [
+    "config/shared",
+    "packages/ocr_core",
+    "/path/to/package_core" <-- Add it here
+    "apps/server"
+  ]
 }
 ```
 
@@ -99,7 +119,7 @@ Therefore, they are coherent in names, as shown in this example case for `ocr`:
 └── packages
     ├── ocr_core 👈
     │   ├── pyproject.toml
-    │   └── ocr_core 👈 supported by its own services, strategies, schemas (Python)
+    │   └── ocr_core 👈 ⚠️ it needs to have an inner folder
     │       ├── schemas_submodule_1
     │       │   └── schemas.py                                (3)
     │       └── schemas_submodule_2

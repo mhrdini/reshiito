@@ -1,3 +1,6 @@
-from .services import OCRServiceInterface, PytesseractOCRService
+from .services import OCRService, OCRServiceInterface
 
-__all__ = ["OCRServiceInterface", "PytesseractOCRService"]
+__all__ = [
+    "OCRServiceInterface",
+    "OCRService",
+]

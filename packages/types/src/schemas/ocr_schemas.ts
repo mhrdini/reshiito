@@ -8,6 +8,7 @@
 export interface OCRRequest {
   b64?: string | null;
   data?: string | null;
+  lang?: string | null;
 }
 export interface OCRResponse {
   text: string;

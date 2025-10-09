@@ -2,7 +2,5 @@
   "name": "@config/shared",
   "version": "1.0.0",
   "private": true,
-  "files": [
-    "api-version.json"
-  ]
+  "main": "shared/index.ts"
 }

@@ -6,3 +6,14 @@ requires-python = ">=3.12"
 name = "ocr-core"
 version = "0.1.0"
 source = { editable = "." }
+dependencies = [
+    { name = "shared" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "shared", editable = "../../config/shared" }]
+
+[[package]]
+name = "shared"
+version = "0.1.0"
+source = { editable = "../../config/shared" }

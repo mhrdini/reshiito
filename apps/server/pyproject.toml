@@ -12,6 +12,7 @@ dependencies = [
     "uvicorn[standard]>=0.37.0",
     "ocr-core",
     "pydantic-to-typescript>=2.0.0",
+    "python-dotenv>=1.1.1",
 ]
 
 [tool.uv.sources]

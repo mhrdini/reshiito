@@ -1,27 +1,75 @@
 from abc import ABC, abstractmethod
+from typing import Sequence
 
-import pytesseract
+from PIL import Image
 
-from ..strategies import ImageInputStrategy
-
-"""
-Defines the OCR service interface and its implementations.
-To be called as a dependency in FastAPI endpoints.
-"""
+from ..config import OCRConfig
+from ..core import ocr_image, ocr_image_async, ocr_images_batch, ocr_images_batch_async
+from ..strategies import ImageInputStrategy, OCRStrategy
 
 
 class OCRServiceInterface(ABC):
     @abstractmethod
-    async def extract_text(self, input_strategy: ImageInputStrategy) -> str:
+    def extract_text(
+        self, image_strategy: ImageInputStrategy, lang: str, **kwargs
+    ) -> str:
+        pass
+
+    @abstractmethod
+    async def extract_text_async(
+        self, image_strategy: ImageInputStrategy, lang: str, **kwargs
+    ) -> str:
+        pass
+
+    @abstractmethod
+    def extract_text_batch(
+        self, image_strategies: Sequence[ImageInputStrategy], lang: str, **kwargs
+    ) -> Sequence[str]:
+        pass
+
+    @abstractmethod
+    async def extract_text_batch_async(
+        self, image_strategies: Sequence[ImageInputStrategy], lang: str, **kwargs
+    ) -> Sequence[str]:
         pass
 
 
-class PytesseractOCRService(OCRServiceInterface):
-    async def extract_text(self, input_strategy: ImageInputStrategy) -> str:
-        image = input_strategy.to_image()
-        # pytesseract is blocking, so run in thread pool for async
-        import asyncio
+class OCRService(OCRServiceInterface):
+    """Generic OCR service that uses dependency injection for the OCR strategy."""
 
-        loop = asyncio.get_event_loop()
-        text = await loop.run_in_executor(None, pytesseract.image_to_string, image)
-        return text
+    def __init__(self, ocr_strategy: OCRStrategy):
+        self.ocr_strategy = ocr_strategy
+
+    def extract_text(
+        self, image_strategy: ImageInputStrategy, lang: str, **kwargs
+    ) -> str:
+        config = OCRConfig(lang=lang, **kwargs)
+        image: Image.Image = image_strategy.to_image()
+        return ocr_image(image=image, config=config, ocr_strategy=self.ocr_strategy)
+
+    async def extract_text_async(
+        self, image_strategy: ImageInputStrategy, lang: str, **kwargs
+    ) -> str:
+        config = OCRConfig(lang=lang, **kwargs)
+        image: Image.Image = image_strategy.to_image()
+        return await ocr_image_async(
+            image=image, config=config, ocr_strategy=self.ocr_strategy
+        )
+
+    def extract_text_batch(
+        self, image_strategies: Sequence[ImageInputStrategy], lang: str, **kwargs
+    ) -> Sequence[str]:
+        config = OCRConfig(lang=lang, **kwargs)
+        images = [s.to_image() for s in image_strategies]
+        return ocr_images_batch(
+            images=images, config=config, ocr_strategy=self.ocr_strategy
+        )
+
+    async def extract_text_batch_async(
+        self, image_strategies: Sequence[ImageInputStrategy], lang: str, **kwargs
+    ) -> Sequence[str]:
+        config = OCRConfig(lang=lang, **kwargs)
+        images = [s.to_image() for s in image_strategies]
+        return await ocr_images_batch_async(
+            images=images, config=config, ocr_strategy=self.ocr_strategy
+        )
