@@ -38,3 +38,7 @@ yarn-error.log*
 .DS_Store
 *.pem
 */.vscode
+
+# Python
+**/__pycache__/
+**/*.py[cod]
