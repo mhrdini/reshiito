@@ -3,12 +3,20 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
+      "@/mocks/*": ["./__mocks__/*"],
       "@/*": ["./src/*"],
       "ui/*": ["../../packages/ui/src/*"],
       "types/*": ["../../packages/types/src/*"],
       "@config/shared/*": ["../../config/shared/*"],
-      "@env": ["src/env.d.ts"]
+      "@env": ["./env.d.ts"]
     }
   },
-  "include": ["src/**/*", "nativewind-env.d.ts", "app-env.d.ts"]
+  "include": [
+    "src/**/*",
+    "nativewind-env.d.ts",
+    "app-env.d.ts",
+    "__mocks__/**/*",
+    "smoke.spec.ts",
+    "jest-setup.ts"
+  ]
 }

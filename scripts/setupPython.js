@@ -1,16 +1,16 @@
 #!/usr/bin/env node
-const { execSync } = require('child_process')
-const os = require('os')
+import { execSync } from 'child_process'
+import os from 'os'
 
 try {
   console.log('➡️ Installing global dependencies...')
   const globalDeps = ['json-schema-to-typescript']
-  for (dep of globalDeps) {
+  for (const dep of globalDeps) {
     try {
       // Check if the package is already installed globally
       execSync(`pnpm list -g ${dep}`, { stdio: 'ignore' })
       console.log(`✅ Already installed: ${dep}`)
-    } catch (err) {
+    } catch {
       // Not installed — install it
       console.log(`⬇️ Installing ${dep}...`)
       execSync(`pnpm add -g ${dep}`, { stdio: 'inherit' })

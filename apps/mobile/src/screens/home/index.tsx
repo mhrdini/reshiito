@@ -33,10 +33,16 @@ export const HomeScreen = () => {
       }
       return result
     }
-    performOCR().then(res => {
-      setResult(res)
-    })
-  }, [image?.base64])
+
+    if (!image?.base64) {
+      setResult('')
+      return
+    } else {
+      performOCR().then(res => {
+        setResult(res)
+      })
+    }
+  }, [image?.base64, extractText, setResult])
 
   return (
     <ScrollView>

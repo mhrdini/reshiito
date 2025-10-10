@@ -1,12 +1,15 @@
 {
   "name": "mobile",
   "version": "1.0.0",
+  "private": true,
+  "main": "expo-router/entry",
   "scripts": {
     "android": "expo start --android",
     "ios": "expo start --ios",
     "dev": "expo start --clear",
     "start": "expo start",
     "prebuild": "expo prebuild",
+    "test": "clear && jest --verbose --watchAll",
     "lint": "eslint \"**/*.{js,jsx,ts,tsx}\" && prettier -c \"**/*.{js,jsx,ts,tsx,json}\"",
     "format": "eslint \"**/*.{js,jsx,ts,tsx}\" --fix && prettier \"**/*.{js,jsx,ts,tsx,json}\" --write",
     "web": "expo start --web"
@@ -14,7 +17,7 @@
   "dependencies": {
     "@config/shared": "workspace:*",
     "@tanstack/react-query": "^5.90.2",
-    "expo": "~54.0.12",
+    "expo": "~54.0.13",
     "expo-camera": "~17.0.8",
     "expo-constants": "~18.0.9",
     "expo-image": "~3.0.9",
@@ -22,7 +25,7 @@
     "expo-linking": "~8.0.8",
     "expo-manifests": "~1.0.8",
     "expo-media-library": "~18.2.0",
-    "expo-router": "~6.0.10",
+    "expo-router": "~6.0.11",
     "expo-status-bar": "~3.0.8",
     "ky": "^1.11.0",
     "nativewind": "latest",
@@ -42,19 +45,49 @@
   "devDependencies": {
     "@babel/core": "^7.20.0",
     "@config/prettier": "workspace:*",
+    "@config/eslint": "workspace:*",
     "@config/typescript": "workspace:*",
-    "@tanstack/eslint-plugin-query": "^5.91.0",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react-native": "^13.3.3",
+    "@types/jest": "^30.0.0",
     "@types/react": "~19.1.13",
     "eslint": "^9.25.1",
-    "eslint-config-expo": "^10.0.0",
-    "eslint-config-prettier": "^10.1.2",
+    "jest": "~29.7.0",
+    "jest-expo": "~54.0.12",
     "prettier": "^3.2.5",
     "tailwindcss": "^3.4.17",
     "typescript": "~5.9.2"
   },
-  "main": "expo-router/entry",
   "expo-router": {
     "appDir": "src/app"
   },
-  "private": true
+  "jest": {
+    "preset": "jest-expo",
+    "setupFilesAfterEnv": [
+      "<rootDir>/jest.setup.ts"
+    ],
+    "transformIgnorePatterns": [
+      "node_modules/(?!((jest-)?react-native|@react-native(-community)?|expo|@expo|@expo-google-fonts|react-navigation|@react-navigation|native-base|react-native-svg|ky))"
+    ],
+    "moduleNameMapper": {
+      "^@/mocks/(.*)$": "<rootDir>/__mocks__/$1",
+      "^@/(.*)$": "<rootDir>/src/$1",
+      "^ui/(.*)$": "<rootDir>/../../packages/ui/src/$1",
+      "^types/(.*)$": "<rootDir>/../../packages/types/src/$1",
+      "^@config/shared/(.*)$": "<rootDir>/../../config/shared/$1",
+      "^@env$": "<rootDir>/env.d.ts"
+    },
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ],
+    "testMatch": [
+      "**/__tests__/**/*.[jt]s?(x)",
+      "**/?(*.)+(spec|test).[jt]s?(x)"
+    ]
+  }
 }

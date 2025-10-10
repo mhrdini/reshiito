@@ -1,16 +1,17 @@
-import Constants from 'expo-constants'
+import { default as Constants } from 'expo-constants'
 import { api as apiConfig } from '@config/shared'
 import { APP_ENV, API_URL as envApiUrl } from '@env'
 import ky from 'ky'
 
 // Determine the correct API URL
 const getApiUrl = () => {
-  let url = (function () {
+  const url = (function () {
     switch (APP_ENV) {
-      case 'development':
+      case 'development': {
         const host = Constants.expoConfig?.hostUri?.split(':')[0]
         const port = '8000'
         return `http://${host}:${port}`
+      }
       default:
         return envApiUrl
     }

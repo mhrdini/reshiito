@@ -1,8 +1,8 @@
-import { config as baseConfig } from './base.js'
-
 /* eslint-env node */
 
-const expoConfig = require('eslint-config-expo/flat')
+import expoConfig from 'eslint-config-expo/flat.js'
+
+import { config as baseConfig } from './base.mjs'
 
 /**
  * A custom ESLint configuration for libraries that use Expo.

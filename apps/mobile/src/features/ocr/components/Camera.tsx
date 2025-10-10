@@ -56,16 +56,16 @@ export const Camera = () => {
     }
   }
 
-  const takePicture = async () => {
+  const capture = async () => {
     if (cameraRef.current && isCameraReady) {
-      const options: CameraPictureOptions = {
+      const cameraOptions: CameraPictureOptions = {
         quality: 1,
         base64: true,
         exif: false,
         shutterSound: true,
         isImageMirror: true,
       }
-      const result = await cameraRef.current.takePictureAsync(options)
+      const result = await cameraRef.current.takePictureAsync(cameraOptions)
       const image = convertToImage(result)
       setCapturedImage(image)
     }
@@ -74,6 +74,7 @@ export const Camera = () => {
   const renderCamera = () => (
     <>
       <CameraView
+        testID='camera'
         style={{ flex: 1, width: '100%' }}
         ref={cameraRef}
         onCameraReady={onCameraReady}
@@ -86,6 +87,7 @@ export const Camera = () => {
         <View className='basis-1/3 items-center justify-center'>
           <Button
             onPress={cancel}
+            testID='cancel-button'
             className='bg-transparent active:bg-transparent dark:bg-transparent dark:active:bg-transparent'
             textClassName='text-white dark:text-white text-2xl text-center'
           >
@@ -93,7 +95,7 @@ export const Camera = () => {
           </Button>
         </View>
         <View className='flex basis-1/3 items-center justify-center'>
-          <Pressable onPress={takePicture}>
+          <Pressable testID='capture-button' onPress={capture}>
             {({ pressed }) => (
               <View
                 className={cn(
@@ -118,6 +120,7 @@ export const Camera = () => {
     <>
       {capturedImage && capturedSize && (
         <Image
+          testID='preview-image'
           source={capturedImage!.uri}
           style={{ height: capturedSize?.height, width: capturedSize?.width }}
         />
@@ -126,6 +129,7 @@ export const Camera = () => {
         <View className='basis-1/3 items-center justify-center'>
           <Button
             onPress={retake}
+            testID='retake-button'
             className='bg-transparent active:bg-transparent dark:bg-transparent dark:active:bg-transparent'
             textClassName='text-white dark:text-white text-2xl text-center'
           >
@@ -135,6 +139,7 @@ export const Camera = () => {
         <View className='flex basis-1/3 items-center justify-center'>
           <Button
             onPress={confirm}
+            testID='confirm-button'
             className='bg-transparent active:bg-transparent dark:bg-transparent dark:active:bg-transparent'
             textClassName='text-white dark:text-white text-2xl text-center'
           >

@@ -11,7 +11,7 @@ export const SelectImageButton = () => {
   }
 
   const selectImage = async () => {
-    let result = await ImagePicker.launchImageLibraryAsync({
+    const result = await ImagePicker.launchImageLibraryAsync({
       base64: true,
       mediaTypes: ['images', 'livePhotos'],
       allowsEditing: true,

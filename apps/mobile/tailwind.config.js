@@ -1,13 +1,14 @@
-import animate from 'tailwindcss-animate'
+// import animate from 'tailwindcss-animate'
+import nativewind from 'nativewind/preset'
 
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
   content: [
     './src/**/*.{js,ts,tsx}',
     '../../packages/ui/src/components/**/*.{js,ts,tsx}',
   ],
 
-  presets: [require('nativewind/preset')],
+  presets: [nativewind],
   theme: {
     extend: {},
   },

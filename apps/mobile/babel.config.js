@@ -1,4 +1,4 @@
-module.exports = function (api) {
+export default function (api) {
   const appEnv = process.env.APP_ENV || 'development'
   const envFile = `.env.${appEnv}`
   api.cache(true)
