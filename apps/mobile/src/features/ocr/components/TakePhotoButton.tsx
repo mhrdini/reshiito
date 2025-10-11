@@ -7,5 +7,9 @@ export const TakePhotoButton = () => {
     router.navigate('/camera')
   }
 
-  return <Button onPress={handlePress}>Take Photo</Button>
+  return (
+    <Button testID='take-photo-button' onPress={handlePress}>
+      Take Photo
+    </Button>
+  )
 }

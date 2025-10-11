@@ -49,7 +49,7 @@
   "lint-staged": {
     "**/*.{js,ts,jsx,tsx,css,html}": [
       "prettier --single-quote --write",
-      "eslint --fix --config ./config/eslint/base.js"
+      "eslint --fix"
     ]
   },
   "config": {

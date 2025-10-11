@@ -1,3 +1,4 @@
+import { MOCK_IMAGE } from '@/constants'
 import { useImageStore } from '@/store'
 import { act } from '@testing-library/react-native'
 
@@ -17,7 +18,7 @@ describe('useImageStore', () => {
   })
 
   it('setImage updates image and size', () => {
-    const newImage = { uri: 'uri1', width: 100, height: 200, base64: 'abc' }
+    const newImage = MOCK_IMAGE
 
     act(() => store.setImage(newImage))
 
@@ -27,7 +28,7 @@ describe('useImageStore', () => {
   })
 
   it('setCapturedImage updates capturedImage and capturedSize', () => {
-    const captured = { uri: 'uri2', width: 50, height: 50, base64: 'xyz' }
+    const captured = MOCK_IMAGE
 
     act(() => store.setCapturedImage(captured))
 
@@ -37,7 +38,7 @@ describe('useImageStore', () => {
   })
 
   it('clearImage resets image and size', () => {
-    act(() => store.setImage({ uri: 'x', width: 10, height: 10, base64: 'a' }))
+    act(() => store.setImage(MOCK_IMAGE))
 
     act(() => store.clearImage())
 
@@ -47,9 +48,7 @@ describe('useImageStore', () => {
   })
 
   it('clearCapturedImage resets capturedImage and capturedSize', () => {
-    act(() =>
-      store.setCapturedImage({ uri: 'y', width: 20, height: 20, base64: 'b' }),
-    )
+    act(() => store.setCapturedImage(MOCK_IMAGE))
 
     act(() => store.clearCapturedImage())
 

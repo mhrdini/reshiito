@@ -1,28 +1,25 @@
 import '@testing-library/jest-dom'
 
+import { MOCK_OCR_TEXT } from './src/constants'
+
 // Manual mocks from '__mocks__' directory
-jest.mock('zustand')
+// jest.mock('zustand')
 
 jest.mock('expo-router')
 
 jest.mock('expo-camera')
 
-// Manual mocks
-jest.mock('expo-media-library', () => ({
-  saveToLibraryAsync: jest.fn().mockResolvedValue('mock-uri'),
-  usePermissions: jest.fn(() => [
-    { granted: true }, // permission object
-    jest.fn(), // request function
-  ]),
-}))
+jest.mock('expo-image-picker')
 
-// Internal modules mocks
+jest.mock('expo-media-library')
+
+// Internal modules
 jest.mock('@/features/ocr/utils', () => ({
   convertToImage: jest.fn(result => ({
     uri: result.uri,
-    height: 100,
-    width: 100,
-    base64: 'bW9jaw==',
+    width: result.width,
+    height: result.height,
+    base64: result.base64,
   })),
 }))
 
@@ -31,4 +28,13 @@ jest.mock('@/features/ocr/hooks', () => ({
     permissions: true,
     requestPermissions: jest.fn(),
   }),
+  useOCR: () => ({
+    extractText: jest.fn().mockResolvedValue(MOCK_OCR_TEXT),
+    isPending: false,
+    isSuccess: true,
+  }),
+}))
+
+jest.mock('@/features/ocr/ocr.query', () => ({
+  usePerformOCRMutation: jest.fn(),
 }))

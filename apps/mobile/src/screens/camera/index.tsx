@@ -6,6 +6,7 @@ import { cn } from 'ui/utils'
 export const CameraScreen = () => {
   return (
     <View
+      testID='camera-screen'
       className={cn(
         'flex-1 items-center justify-center bg-black',
         Platform.OS === 'web' && 'h-screen',

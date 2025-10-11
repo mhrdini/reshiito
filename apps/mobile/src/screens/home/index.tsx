@@ -6,21 +6,13 @@ import { SelectImageButton, TakePhotoButton } from '@/features/ocr'
 import { useOCR } from '@/features/ocr/hooks'
 import { API_URL } from '@/lib/apiClient'
 import { useImageStore, useOCRStore } from '@/store'
-import { Button, Image, Text, View } from 'ui/components'
+import { Image, Text, View } from 'ui/components'
 import { cn } from 'ui/utils'
 
 export const HomeScreen = () => {
   const { image, size } = useImageStore()
   const { result, setResult } = useOCRStore()
   const { extractText, isPending, isSuccess } = useOCR()
-
-  const handlePress = async () => {
-    const example = 'ZXhhbXBsZQ=='
-    const text = await extractText(example)
-    if (text) {
-      setResult(text)
-    }
-  }
 
   useEffect(() => {
     async function performOCR() {
@@ -34,27 +26,30 @@ export const HomeScreen = () => {
       return result
     }
 
-    if (!image?.base64) {
-      setResult('')
-      return
-    } else {
+    if (image && result === '') {
       performOCR().then(res => {
-        setResult(res)
+        if (res !== useOCRStore.getState().result) {
+          setResult(res)
+        }
       })
     }
-  }, [image?.base64, extractText, setResult])
+  }, [image, extractText, result, setResult])
 
   return (
     <ScrollView>
       <SafeAreaView
+        testID='home-screen'
         className={cn(
           'flex-1 items-center justify-center gap-5 bg-slate-50 dark:bg-slate-900',
         )}
       >
         <StatusBar style='auto' />
-        <Text className={cn('text-2xl')}>reshiito レシート</Text>
+        <Text testID='title' className={cn('text-2xl')}>
+          reshiito レシート
+        </Text>
         {image && size && (
           <Image
+            testID='selected-image'
             source={{ uri: image.uri }}
             style={{ height: size.height, width: size.width }}
           />
@@ -62,7 +57,6 @@ export const HomeScreen = () => {
         <View className={cn('flex-row gap-2')}>
           <TakePhotoButton />
           <SelectImageButton />
-          <Button onPress={handlePress}>Test</Button>
         </View>
         <Text>{API_URL}</Text>
         <Text>isSuccess: {JSON.stringify(isSuccess)}</Text>

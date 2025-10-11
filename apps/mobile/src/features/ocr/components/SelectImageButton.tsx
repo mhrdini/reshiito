@@ -25,5 +25,9 @@ export const SelectImageButton = () => {
     }
   }
 
-  return <Button onPress={handlePress}>Choose from Library</Button>
+  return (
+    <Button testID='select-image-button' onPress={handlePress}>
+      Choose from Library
+    </Button>
+  )
 }

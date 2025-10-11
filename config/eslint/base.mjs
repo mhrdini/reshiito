@@ -47,6 +47,14 @@ export const config = [
   // Custom rules, overrides
   // no-unused-imports
   {
+    rules: {
+      '@typescript-eslint/no-unused-vars': [
+        'warn',
+        { argsIgnorePattern: '^_' },
+      ],
+    },
+  },
+  {
     plugins: {
       'unused-imports': unusedImports,
     },
