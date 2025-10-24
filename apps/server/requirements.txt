@@ -82,7 +82,9 @@ pygments==2.19.2
 pytesseract==0.3.13
     # via server
 python-dotenv==1.1.1
-    # via uvicorn
+    # via
+    #   server
+    #   uvicorn
 python-multipart==0.0.20
     # via fastapi
 pyyaml==6.0.3

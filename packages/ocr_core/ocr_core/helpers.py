@@ -21,7 +21,12 @@ def bytes_to_image(data: bytes) -> Image.Image:
     """
     Converts bytes to a PIL Image suitable for pytesseract.
     """
-    image = Image.open(io.BytesIO(data))
+    try:
+        image = Image.open(io.BytesIO(data))
+        image = image.convert("RGB")
+        image = image.copy()  # make sure the image is writable
+    except Exception as e:
+        raise ValueError("Bytes do not represent a valid image") from e
     return image
 
 

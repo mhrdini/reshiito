@@ -10,13 +10,13 @@ Defines strategies for handling different types of image input for OCR processin
 """
 
 
-class ImageInputStrategy(ABC):
+class ImageStrategy(ABC):
     @abstractmethod
     def to_image(self) -> Image.Image:
         pass
 
 
-class BytesInputStrategy(ImageInputStrategy):
+class BytesImageStrategy(ImageStrategy):
     def __init__(self, data: bytes):
         self.data = data
 
@@ -24,7 +24,7 @@ class BytesInputStrategy(ImageInputStrategy):
         return bytes_to_image(self.data)
 
 
-class Base64InputStrategy(ImageInputStrategy):
+class Base64ImageStrategy(ImageStrategy):
     def __init__(self, b64: str):
         self.b64 = b64
 
@@ -32,10 +32,10 @@ class Base64InputStrategy(ImageInputStrategy):
         return base64_to_image(self.b64)
 
 
-def get_input_strategy(req: OCRRequest) -> ImageInputStrategy:
+def get_input_strategy(req: OCRRequest) -> ImageStrategy:
     if req.b64:
-        return Base64InputStrategy(req.b64)
+        return Base64ImageStrategy(req.b64)
     elif req.data:
-        return BytesInputStrategy(req.data)
+        return BytesImageStrategy(req.data)
     else:
-        raise ValueError("No valid input provided")
+        raise ValueError("Invalid image input")

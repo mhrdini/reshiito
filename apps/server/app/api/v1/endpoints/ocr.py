@@ -1,6 +1,6 @@
 from app.core.deps import get_ocr_service
 from app.logger import logger
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException
 from ocr_core.schemas import OCRRequest, OCRResponse
 from ocr_core.services import OCRServiceInterface
 from ocr_core.strategies import get_input_strategy
@@ -33,8 +33,8 @@ async def perform_ocr(
     except ValueError as ve:
         # Handle invalid image input
         logger.error(f"perform_ocr: {ve}")
-        raise
+        raise HTTPException(status_code=422, detail=str(ve))
     except Exception as e:
         # Catch-all for anything else
         logger.error(f"perform_ocr: {e}")
-        raise
+        raise HTTPException(status_code=500, detail=str(e))

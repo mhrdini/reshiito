@@ -14,7 +14,7 @@
       │                        Injected OCRStrategy
       │                                 │
       ▼                                 ▼
-[ImageInputStrategy] ──> PIL.Image ──> run_ocr / run_ocr_async
+[ImageStrategy] ──> PIL.Image ──> run_ocr / run_ocr_async
                                         │
                                         ▼
                                 [Core OCR functions]

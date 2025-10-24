@@ -13,6 +13,12 @@ PYTHON_PACKAGES=($(jq -r '.python_packages[]' "$ROOT_DIR/config/python_packages.
 EXTRA_DEPS_FILE="extra_deps.py"
 
 # ----------------------------------------------
+# > Install test dependencies
+# ----------------------------------------------
+echo "➡️  Installing test dependencies..."
+"$PYTHON" -m pip install pytest pytest-mock pytest-asyncio pytest-cov httpx
+
+# ----------------------------------------------
 # > Install internal packages as editable
 # ----------------------------------------------
 for pkg in "${INTERNAL_PACKAGES[@]}"; do

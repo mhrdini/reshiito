@@ -1,4 +1,3 @@
-# ocr_core/logger.py
 import logging
 import sys
 

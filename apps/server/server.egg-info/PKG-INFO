@@ -11,6 +11,7 @@ Requires-Dist: setuptools>=80.9.0
 Requires-Dist: uvicorn[standard]>=0.37.0
 Requires-Dist: ocr-core
 Requires-Dist: pydantic-to-typescript>=2.0.0
+Requires-Dist: python-dotenv>=1.1.1
 
 # Server for reshiito
 

@@ -11,6 +11,13 @@ $PythonPackages = $packagesJson.python_packages
 $ExtraDepsFile = "extra_deps.py"
 
 # ----------------------------------------------
+# > Install test dependencies
+# ----------------------------------------------
+Write-Host "Installing test dependencies..."
+& $Python -m pip install pytest pytest-mock pytest-asyncio pytest-cov httpx
+
+
+# ----------------------------------------------
 # > Install internal packages as editable
 # ----------------------------------------------
 foreach ($pkg in $InternalPackages) {
