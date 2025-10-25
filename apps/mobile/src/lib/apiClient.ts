@@ -27,6 +27,7 @@ export const API_PREFIX_URL = API_URL + '/api/' + API_VERSION
 export const api = ky.create({
   prefixUrl: API_PREFIX_URL,
   headers: { 'Content-Type': 'application/json' },
+  timeout: apiConfig.TIMEOUT,
 })
 
 // export const ocrApi = api.extend(options => ({

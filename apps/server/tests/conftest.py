@@ -5,6 +5,7 @@ import pytest
 from app.main import app
 from fastapi.testclient import TestClient
 from PIL import Image
+from shared import ocr
 
 
 @pytest.fixture()
@@ -56,7 +57,11 @@ def ocr_payload_factory(
     """
 
     def _factory(
-        *, input_type: str = "base64", valid=True, lang="jpn", custom_data=None
+        *,
+        input_type: str = "base64",
+        valid=True,
+        lang=ocr["languages"]["japanese"],
+        custom_data=None,
     ):
         if input_type == "base64":
             data = sample_image_b64 if valid else "invalid_base64_string"
