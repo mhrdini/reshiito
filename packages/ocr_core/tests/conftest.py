@@ -1,5 +1,6 @@
 import ocr_core.helpers as helpers
 import pytest
+from shared import ocr
 
 
 @pytest.fixture
@@ -43,7 +44,7 @@ def config(tmp_path):
     class DummyConfig:
         temp_dir = tmp_path
         debug = False
-        lang = "jpn"
+        lang = ocr["languages"]["japanese"]
         max_concurrency = 2
 
     return DummyConfig()
