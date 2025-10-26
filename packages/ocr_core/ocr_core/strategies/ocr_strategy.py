@@ -6,7 +6,7 @@ import pytesseract
 from PIL import Image
 
 from ..config import OCRConfig
-from ..helpers import ensure_rgb, resize_large_image, save_temp_image
+from ..helpers import clean_ocr_text, ensure_rgb, resize_large_image, save_temp_image
 
 
 class OCRStrategy(ABC):
@@ -44,7 +44,11 @@ class PytesseractOCRStrategy(OCRStrategy):
 
         try:
             lang_code = self.get_lang_code(config.lang)
-            return pytesseract.image_to_string(str(temp_path), lang=lang_code)
+            result = pytesseract.image_to_string(
+                str(temp_path), lang=lang_code, config="--psm 6"
+            )
+            cleaned = clean_ocr_text(result)
+            return cleaned
         finally:
             if temp_path.exists() and not config.debug:
                 temp_path.unlink()

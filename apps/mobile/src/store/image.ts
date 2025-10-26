@@ -7,8 +7,10 @@ export interface ImageState {
   capturedImage: Image | null
   size: ImageSize | null
   capturedSize: ImageSize | null
+  isNewImage: boolean
   setImage: (image: Image) => void
   setCapturedImage: (image: Image | null) => void
+  setIsNewImage: (isNew: boolean) => void
   clearImage: () => void
   clearCapturedImage: () => void
   isCameraReady: boolean
@@ -21,8 +23,13 @@ export const imageStoreCreator: StateCreator<ImageState> = set => ({
   capturedImage: null,
   size: null,
   capturedSize: null,
+  isNewImage: false,
   setImage: image =>
-    set({ image, size: getPaddedImageSize(image.height, image.width) }),
+    set({
+      image,
+      isNewImage: true,
+      size: getPaddedImageSize(image.height, image.width),
+    }),
   setCapturedImage: image =>
     set({
       capturedImage: image,
@@ -30,6 +37,7 @@ export const imageStoreCreator: StateCreator<ImageState> = set => ({
         ? getPaddedImageSize(image.height, image.width, 150, 150)
         : null,
     }),
+  setIsNewImage: isNew => set({ isNewImage: isNew }),
   clearImage: () => set({ image: null, size: null }),
   clearCapturedImage: () => set({ capturedImage: null, capturedSize: null }),
   isCameraReady: false,
@@ -40,6 +48,7 @@ export const imageStoreCreator: StateCreator<ImageState> = set => ({
       capturedImage: null,
       size: null,
       capturedSize: null,
+      isNewImage: false,
       isCameraReady: false,
     }),
 })

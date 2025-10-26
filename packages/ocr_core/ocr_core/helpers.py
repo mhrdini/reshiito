@@ -1,6 +1,7 @@
 import base64
 import binascii
 import io
+import re
 import tempfile
 import uuid
 from pathlib import Path
@@ -92,3 +93,19 @@ def save_temp_image(
     if debug:
         logger.info(f"📝 OCR debug: saved temp image at {temp_path}")
     return temp_path
+
+
+def clean_ocr_text(text: str) -> str:
+    # Strip leading/trailing whitespace
+    text = text.strip()
+
+    # Replace multiple newlines with a single newline
+    text = re.sub(r"\n+", "\n", text)
+
+    # Replace multiple spaces/tabs with a single space
+    # text = re.sub(r"[ \t]+", " ", text)
+
+    # Remove non-printable characters
+    text = "".join(c for c in text if c.isprintable())
+
+    return text

@@ -1,5 +1,5 @@
 import pytest
-from ocr_core.services.services import OCRService
+from ocr_core.services.ocr_service import OCRService
 
 
 def test_ocr_service_sync(

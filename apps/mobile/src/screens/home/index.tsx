@@ -10,7 +10,7 @@ import { Image, Text, View } from 'ui/components'
 import { cn } from 'ui/utils'
 
 export const HomeScreen = () => {
-  const { image, size } = useImageStore()
+  const { image, size, isNewImage, setIsNewImage } = useImageStore()
   const { result, setResult } = useOCRStore()
   const { extractText, isPending, isSuccess } = useOCR()
 
@@ -26,14 +26,15 @@ export const HomeScreen = () => {
       return result
     }
 
-    if (image && result === '') {
+    if (isNewImage) {
       performOCR().then(res => {
         if (res !== useOCRStore.getState().result) {
           setResult(res)
+          setIsNewImage(false)
         }
       })
     }
-  }, [image, extractText, result, setResult])
+  }, [image, extractText, result, setResult, setIsNewImage, isNewImage])
 
   return (
     <ScrollView>

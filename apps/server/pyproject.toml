@@ -13,6 +13,7 @@ dependencies = [
     "ocr-core",
     "pydantic-to-typescript>=2.0.0",
     "python-dotenv>=1.1.1",
+    "opencv-python>=4.12.0.88",
 ]
 
 [tool.uv.sources]

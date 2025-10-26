@@ -5,6 +5,7 @@ from PIL import Image
 
 from ..config import OCRConfig
 from ..core import ocr_image, ocr_image_async, ocr_images_batch, ocr_images_batch_async
+from ..image_processing import preprocess_image
 from ..strategies import ImageStrategy, OCRStrategy
 
 
@@ -41,6 +42,7 @@ class OCRService(OCRServiceInterface):
     def extract_text(self, image_strategy: ImageStrategy, lang: str, **kwargs) -> str:
         config = OCRConfig(lang=lang, **kwargs)
         image: Image.Image = image_strategy.to_image()
+        image = preprocess_image(image)
         return ocr_image(image=image, config=config, ocr_strategy=self.ocr_strategy)
 
     async def extract_text_async(
@@ -48,6 +50,7 @@ class OCRService(OCRServiceInterface):
     ) -> str:
         config = OCRConfig(lang=lang, **kwargs)
         image: Image.Image = image_strategy.to_image()
+        image = preprocess_image(image)
         return await ocr_image_async(
             image=image, config=config, ocr_strategy=self.ocr_strategy
         )
@@ -56,7 +59,7 @@ class OCRService(OCRServiceInterface):
         self, image_strategies: Sequence[ImageStrategy], lang: str, **kwargs
     ) -> Sequence[str]:
         config = OCRConfig(lang=lang, **kwargs)
-        images = [s.to_image() for s in image_strategies]
+        images = [preprocess_image(s.to_image()) for s in image_strategies]
         return ocr_images_batch(
             images=images, config=config, ocr_strategy=self.ocr_strategy
         )
@@ -65,7 +68,7 @@ class OCRService(OCRServiceInterface):
         self, image_strategies: Sequence[ImageStrategy], lang: str, **kwargs
     ) -> Sequence[str]:
         config = OCRConfig(lang=lang, **kwargs)
-        images = [s.to_image() for s in image_strategies]
+        images = [preprocess_image(s.to_image()) for s in image_strategies]
         return await ocr_images_batch_async(
             images=images, config=config, ocr_strategy=self.ocr_strategy
         )

@@ -1,4 +1,4 @@
-from .services import OCRService, OCRServiceInterface
+from .ocr_service import OCRService, OCRServiceInterface
 
 __all__ = [
     "OCRServiceInterface",
